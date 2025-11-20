@@ -41,15 +41,22 @@ Auto-Continue uses **Claude to judge Claude** - when Claude tries to stop, a sep
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/double-shot-latte.git
+git clone https://github.com/obra/double-shot-latte.git
 
 # Add as plugin marketplace
 /plugin marketplace add /path/to/double-shot-latte
 
 # Install the plugin
-/plugin install double-shot-latte@auto-continue-dev
+/plugin install double-shot-latte@double-shot-latte-dev
 
 # Restart Claude Code to activate
+```
+
+**Or use the superpowers-marketplace:**
+
+```bash
+# Install from superpowers-marketplace
+/plugin install double-shot-latte@superpowers-marketplace
 ```
 
 ## Features
