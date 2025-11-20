@@ -1,4 +1,4 @@
-# Claude Auto-Continue
+# Double Shot Latte
 
 **Stop the "Would you like me to continue?" interruptions.**
 
@@ -41,13 +41,13 @@ Auto-Continue uses **Claude to judge Claude** - when Claude tries to stop, a sep
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/claude-auto-continue.git
+git clone https://github.com/your-username/double-shot-latte.git
 
 # Add as plugin marketplace
-/plugin marketplace add /path/to/claude-auto-continue
+/plugin marketplace add /path/to/double-shot-latte
 
 # Install the plugin
-/plugin install auto-continue@auto-continue-dev
+/plugin install double-shot-latte@auto-continue-dev
 
 # Restart Claude Code to activate
 ```
@@ -160,7 +160,7 @@ echo '{"session_id":"test"}' | \
 ### Plugin Structure
 
 ```
-claude-auto-continue/
+double-shot-latte/
 ├── .claude-plugin/
 │   ├── plugin.json           # Plugin metadata
 │   └── marketplace.json      # Development marketplace
