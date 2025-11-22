@@ -8,6 +8,5 @@
   },
   "homepage": "https://github.com/anthropics/claude-code",
   "license": "MIT",
-  "keywords": ["hooks", "automation", "workflow", "continuation"],
-  "hooks": "./hooks/hooks.json"
+  "keywords": ["hooks", "automation", "workflow", "continuation"]
 }
