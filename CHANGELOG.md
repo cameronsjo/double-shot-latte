@@ -5,6 +5,18 @@ All notable changes to Double Shot Latte will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2025-11-22
+
+### Fixed
+- Stop conditions now take precedence over continue conditions when both apply
+- Hook correctly stops when presenting plans/designs for user approval
+- Fixed issue where hook would push Claude to continue when asking questions like "Does this approach look good?"
+
+### Added
+- Comprehensive eval test suite with 60 scenarios (30 STOP, 30 CONTINUE)
+- Test runner executing 5 runs per scenario for reliability validation
+- Explicit plan presentation detection patterns in evaluation prompt
+
 ## [1.1.1] - 2025-11-22
 
 ### Fixed
