@@ -63,35 +63,32 @@ RECENT_CONTEXT=$(tail -n 10 "$TRANSCRIPT_PATH" | jq -s '.')
 JSON_SCHEMA='{"type":"object","properties":{"should_continue":{"type":"boolean"},"reasoning":{"type":"string"}},"required":["should_continue","reasoning"]}'
 
 # Create a prompt for Claude to evaluate whether continuation is appropriate
-EVALUATION_PROMPT="You are evaluating whether a Claude Code session should continue working. Your default stance is to CONTINUE unless there's a CLEAR reason to stop.
+EVALUATION_PROMPT="You are evaluating whether a Claude Code session should continue working.
 
 Here is the recent conversation context:
 $RECENT_CONTEXT
 
-CRITICAL: Stop conditions ALWAYS take precedence over continue conditions.
+THE RULE IS SIMPLE:
 
-STOP (return should_continue: false) if ANY of these apply:
-1. Presenting a plan/design and asking for approval or feedback (\"Does this approach look good?\", \"Should I proceed?\", \"Does this wording work?\")
-2. Directly asking for user decisions (\"Which approach would you prefer?\", \"How should I handle...\")
-3. Requesting specific clarification on ambiguous requirements
-4. Work is genuinely complete AND properly documented
-5. Explicitly stated need for user input (\"I need you to...\")
+STOP (return should_continue: false) if the assistant's message ends with ANY question directed at the user.
 
-Plan presentation signals (these REQUIRE stopping):
-- Presenting design sections with questions like \"Does this look right?\", \"Should I continue?\"
-- Outlining proposed changes and asking \"Does this approach work for you?\"
-- Showing specific text/code changes before implementing and asking for confirmation
-- ANY question asking for approval/feedback on what WILL be done (not what WAS done)
+This includes but is not limited to:
+- Asking for approval (\"Does this look good?\", \"Should I proceed?\")
+- Asking for decisions (\"Which approach?\", \"What direction?\")
+- Asking for clarification (\"What do you mean by...?\")
+- Asking for confirmation (\"Is this what you wanted?\")
+- Asking for input (\"What should I name this?\")
 
-CONTINUE (return should_continue: true) ONLY if ALL stop conditions are absent AND:
-- Work appears incomplete
-- There are obvious next steps (more files to create, more functions to implement, more tests to write)
-- Assistant mentioned follow-up work (\"Next I'll...\", \"I should also...\")
-- Implementation has TODOs, stubs, or placeholder content
-- Multi-step process with remaining steps
-- Assistant is in the middle of a logical sequence
+THE ONLY EXCEPTION - CONTINUE (return should_continue: true) if:
+The assistant is asking whether to continue working on the current task. Examples:
+- \"Should I continue?\" (in the context of continuing implementation)
+- \"Want me to keep going?\"
+- \"Should I proceed with the next step?\"
+- \"Shall I continue with the remaining items?\"
 
-Remember: If BOTH stop and continue conditions apply, STOP wins. Plan presentation + incomplete work = STOP."
+These \"should I continue working\" questions get an implicit YES - continue working.
+
+ANY OTHER QUESTION = STOP. No exceptions. Context doesn't matter (brainstorming, bug fixing, implementing - irrelevant). If it's a question and it's not \"should I keep working?\", STOP."
 
 # Use claude --print to get the evaluation with structured output
 # Set environment variable to prevent recursion and use JSON schema for reliable parsing
