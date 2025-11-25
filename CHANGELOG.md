@@ -5,6 +5,13 @@ All notable changes to Double Shot Latte will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2025-11-24
+
+### Fixed
+- Simplified stop hook logic to prevent rationalization loopholes
+- Previous complex rules allowed Haiku to classify decision questions as "clarification" based on context (e.g., "it's brainstorming, not plan presentation")
+- New rule is absolute: any question to user = STOP, except "should I continue working?" = CONTINUE
+
 ## [1.1.2] - 2025-11-22
 
 ### Fixed
