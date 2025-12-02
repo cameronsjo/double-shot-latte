@@ -65,6 +65,10 @@ JSON_SCHEMA='{"type":"object","properties":{"should_continue":{"type":"boolean"}
 # System prompt to establish evaluator identity (not a coding agent)
 SYSTEM_PROMPT="You are a conversation state classifier. Your only job is to analyze conversation transcripts and determine if the assistant has more autonomous work to do. You output structured JSON. You do not write code or use tools."
 
+# Ensure the working directory exists
+CLAUDE_WORK_DIR="$HOME/.claude/double-shot-latte"
+mkdir -p "$CLAUDE_WORK_DIR"
+
 # Create the evaluation prompt
 EVALUATION_PROMPT="Analyze this conversation and determine: Does the assistant have more autonomous work to do RIGHT NOW?
 
@@ -98,7 +102,8 @@ Default to STOP when uncertain."
 
 # Use claude --print to get the evaluation with structured output
 # Set environment variable to prevent recursion, use JSON schema, disable tools
-CLAUDE_RESPONSE=$(echo "$EVALUATION_PROMPT" | CLAUDE_HOOK_JUDGE_MODE=true claude --print --model haiku --output-format json --json-schema "$JSON_SCHEMA" --system-prompt "$SYSTEM_PROMPT" --disallowedTools '*' 2>/dev/null)
+# Run claude in the dedicated working directory
+CLAUDE_RESPONSE=$(echo "$EVALUATION_PROMPT" | (cd "$CLAUDE_WORK_DIR" && CLAUDE_HOOK_JUDGE_MODE=true claude --print --model haiku --output-format json --json-schema "$JSON_SCHEMA" --system-prompt "$SYSTEM_PROMPT" --disallowedTools '*') 2>/dev/null)
 
 # Check if claude command succeeded
 if [ $? -ne 0 ]; then
