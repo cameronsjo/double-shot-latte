@@ -1,8 +1,8 @@
 # Double Shot Latte
 
-**Stops "Would you like me to continue?" interruptions.**
+Stops "Would you like me to continue?" interruptions. Uses a separate Claude instance to judge whether work should continue.
 
-Claude Code plugin that uses Claude to judge whether Claude should continue working.
+> Maintained fork of [obra/double-shot-latte](https://github.com/obra/double-shot-latte) by [@cameronsjo](https://github.com/cameronsjo).
 
 ## The Problem
 
@@ -123,13 +123,11 @@ By default, the plugin uses Claude Haiku for fast, cost-effective judgments. You
 - Check throttle files: `/tmp/.claude-continue-throttle-*`
 - Verify `jq` is installed
 
-## Contributing
-
-1. Fork repository
-2. Create feature branch
-3. Test changes
-4. Submit pull request
-
 ## License
 
-MIT License - see [LICENSE](LICENSE)
+MIT License - see [LICENSE](LICENSE).
+
+## Support
+
+- **Issues**: https://github.com/cameronsjo/double-shot-latte/issues
+- **Upstream**: https://github.com/obra/double-shot-latte
