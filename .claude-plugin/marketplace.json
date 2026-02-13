@@ -1,0 +1,20 @@
+{
+  "name": "double-shot-latte-dev",
+  "description": "Development marketplace for double-shot-latte auto-continuation plugin",
+  "owner": {
+    "name": "Jesse Vincent",
+    "email": "jesse@fsck.com"
+  },
+  "plugins": [
+    {
+      "name": "double-shot-latte",
+      "description": "Auto-continues Claude Code work instead of stopping to ask permission",
+      "version": "1.1.5",
+      "source": "./",
+      "author": {
+        "name": "Jesse Vincent",
+        "email": "jesse@fsck.com"
+      }
+    }
+  ]
+}
